@@ -12,9 +12,9 @@ function Index() {
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center">
-      <img src={pepe} className="w-32" />
+      <img src={pepe} className="w-32 " />
       <h3>{ip}</h3>
-      <Button>Click me</Button>
+      <Button className="bg-violet-400">Click me</Button>
     </div>
   );
 }
