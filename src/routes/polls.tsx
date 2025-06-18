@@ -62,17 +62,15 @@ function PollsComponent() {
             </div>
           </div>
           <div className=" space-y-2 p-4 overflow-y-auto flex-1">
-            <Card cardColor={"yellow"} />
-            <Card cardColor={"blue"} />
-            <Card cardColor={"red"} />
-
-            <Card cardColor={"yellow"} />
-            <Card cardColor={"blue"} />
-            <Card cardColor={"red"} />
-
-            <Card cardColor={"yellow"} />
-            <Card cardColor={"blue"} />
-            <Card cardColor={"red"} />
+            <Card type="document" cardColor={"yellow"} />
+            <Card type="bar" cardColor={"red"} />
+            <Card type="zap" cardColor={"green"} />
+            <Card type="question" cardColor={"blue"} />
+            <Card type="zap" cardColor={"red"} />
+            <Card type="document" cardColor={"green"} />
+            <Card type="bar" cardColor={"blue"} />
+            <Card type="question" cardColor={"yellow"} />
+            <Card type="document" cardColor={"red"} />
           </div>
         </div>
       </div>
