@@ -13,8 +13,8 @@ function Card({ cardColor='blue' }) {
   const colorClass = colorMap[cardColor] || "text-blue-500";
    
   return (
-    <div className="mx-auto max-w-2xl rounded-2xl bg-white p-6 shadow-lg ring-1 ring-black/5 dark:bg-slate-800 dark:text-white dark:ring-white/10 transition hover:bg-zinc-100 dark:hover:bg-slate-700">
-      <div className="flex items-start gap-5">
+    <div className="mx-auto max-w-2xl rounded-2xl bg-white p-6 shadow-sm ring-1 ring-black/10 transition-all duration-200 ease-in-out hover:shadow-md hover:bg-zinc-100 dark:bg-slate-800 dark:text-white dark:ring-white/10 dark:hover:bg-slate-700 dark:hover:shadow-md">
+      <div className="flex font-['Urbanist'] items-start gap-5">
         {/* Icon */}
         <div className="shrink-0">
           <svg
@@ -37,21 +37,21 @@ function Card({ cardColor='blue' }) {
         {/* Content */}
         <div className="flex-1 space-y-2">
           <div onClick={() => setShowForm(!showForm)} >
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+            <h2 className="font-['Lexend'] text-md font-semibold text-gray-900 dark:text-white">
               This is my poll
             </h2>
-            <p className="text-sm text-gray-600 dark:text-gray-300">
+            <p className="text-sm text-gray-500 dark:text-gray-600">
               <strong>ID:</strong> 362161236123
             </p>
-            <p className="text-sm text-gray-600 dark:text-gray-300">
+            <p className="text-sm text-gray-500 dark:text-gray-600">
               <strong>Owner Username:</strong> osman
             </p>
           </div>
 
           {/* Question & Form */}
           {showForm && (
-            <div className="space-y-4 pt-2">
-              <p className="text-base font-medium">
+            <div className="space-y-4 pt-2 font-['Lexend']">
+              <p className="text-base font-medium font-['Lexend']">
                 Which of these cars do you like the most?
               </p>
               <form action="#" method="post" className="space-y-3">
@@ -110,7 +110,7 @@ function Card({ cardColor='blue' }) {
                   type="submit"
                   className="rounded-lg bg-rose-500 px-5 py-2 text-sm font-medium text-white hover:bg-rose-800 transition"
                 >
-                  SUBMIT
+                  VOTE
                 </button>
               </form>
             </div>

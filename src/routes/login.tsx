@@ -1,3 +1,4 @@
+import { Logo } from '@/components/ui/logo';
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/login')({
@@ -7,20 +8,9 @@ export const Route = createFileRoute('/login')({
 function RouteComponent() {
 return (
     <div className="relative flex h-full bg-gray-50">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className="absolute top-12 left-12 size-12 rounded-xl p-2 border border-white/10 bg-white/10 text-rose-950 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.2)] flex items-center justify-center"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z"
-        />
-      </svg>
+      <div className="absolute top-12 left-12">
+        <Logo/>
+      </div>
 
       <div className="p-10 w-5/10 content-center pb-12">
         <h2 className="text-base/7 font-semibold text-gray-900">Log In</h2>
@@ -41,7 +31,7 @@ return (
               <input
                 id="username"
                 name="username"
-                type="username"
+                type="text"
                 className="block w-full pl-10 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
               />
               <svg
