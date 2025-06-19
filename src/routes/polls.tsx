@@ -33,7 +33,9 @@ function PollsComponent() {
         <div className="flex w-full md:w-1/2 justify-center items-start p-8">
           <CreateForm />
         </div>
-        <div ref={sectionRef} className="opacity-0 w-full md:w-1/2 rounded-tl-2xl rounded-tr-2xl  md:rounded-tl-2xl bg-rose-50 flex flex-col px-6 md:px-8 pt-8">
+        <div 
+          // ref={sectionRef}
+          className="w-full md:w-1/2 rounded-tl-2xl rounded-tr-2xl  md:rounded-tl-2xl bg-rose-50 flex flex-col px-6 md:px-8 pt-8">
           <ExistingPolls/>
         </div>
       </div>

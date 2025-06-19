@@ -5,7 +5,6 @@ function useTypewriter(
   text: string, 
   speed = 60, 
   delay = 100,
-  onDone?: () => void
 ) {
   const [displayedText, setDisplayedText] = useState('');
 
@@ -22,9 +21,6 @@ function useTypewriter(
  
 
           clearInterval(typingInterval);
-          if (onDone) {
-            onDone();
-          }
         } 
       }, speed);
     };
@@ -42,23 +38,22 @@ function useTypewriter(
 
 function CreateForm() {
   const [toggleAdd, setToggleAdd] = useState(false);
-  const [formVisibility, setFormVisibility] = useState(false);
   const formRef = useRef(null);
 
   useEffect(() => {
-    if (formVisibility && formRef.current) {
+    if (formRef.current) {
       gsap.fromTo(
         formRef.current, 
         { opacity: 0, y: -20 },
-        { opacity: 1, y: 0, duration: 1, ease: "power2.inOut"}
+        { opacity: 1, y: 0, duration: 1, ease: "power2.inOut", delay: 3}
       )
     }
-  }, [formVisibility])
+  }, [])
 
   const formTitle = 'Create a Poll'
   const descriptionText = 'Fill out the form below to publish your new poll.'
   const typedTitle = useTypewriter(formTitle, 80, 50);
-  const typedDescription = useTypewriter(descriptionText, 30, 1500, () => setFormVisibility(true))
+  const typedDescription = useTypewriter(descriptionText, 30, 1500)
 
   function handleToggleAdd() {
     
@@ -80,8 +75,9 @@ function CreateForm() {
       </div>
 
       {/* Form Fields */}
-      {formVisibility && (
-        <form ref={formRef} className="space-y-5">
+        {/* <form ref={formRef} className="space-y-5"> */}
+        <form className="space-y-5">
+          
           {/* Poll Title */}
           <div className="flex font-['Lexend'] flex-col">
             <label
@@ -318,7 +314,6 @@ function CreateForm() {
             SUBMIT
           </button>
         </form>
-      )}
 
     </div>
   );

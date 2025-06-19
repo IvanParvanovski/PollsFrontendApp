@@ -19,7 +19,9 @@ export function Navbar() {
 
   return (
     <div className="w-full font-['Lexend'] bg-gradient-to-t from-[var(--color-midnight)] to-rose-300  px-6 pt-4 pb-6 shadow-[0_20px_60px_rgba(255,255,255,0.4)]">
-      <div ref={sectionRef} className="max-w-7xl mx-auto flex items-center justify-between">
+      <div 
+        // ref={sectionRef} 
+        className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center gap-8">
           <a href="/polls" className="text-base font-medium text-white hover:underline cursor-pointer underline-offset-4">Home</a>
         </div>
