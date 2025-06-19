@@ -48,7 +48,7 @@ export function ExistingPolls() {
             </div>
           </div>
 
-          <div className=" space-y-2 p-4 overflow-y-auto flex-1">
+          <div className=" space-y-2 md:p-4 overflow-y-auto flex-1">
             <Card type="document" cardColor={"yellow"} />
             <Card type="bar" cardColor={"red"} />
             <Card type="zap" cardColor={"green"} />
