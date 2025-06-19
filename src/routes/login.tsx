@@ -12,10 +12,11 @@ return (
         <Logo/>
       </div>
 
-      <div className="p-10 w-5/10 content-center pb-12">
+      <div className="p-10 w-9/10 md:w-5/10  mx-auto content-center pb-12">
         <h2 className="text-base/7 font-semibold text-gray-900">Log In</h2>
         <p className="mt-1 mb-8 text-sm/6 text-gray-600">
-            Don't have an account? <span className="text-blue-500 underline font-bold">Register now</span>.
+            Don't have an account? <span className="text-blue-500 underline font-bold">
+              <a href="/register">Register now</a></span>.
         </p>
 
 
@@ -87,7 +88,7 @@ return (
           </button>
         </form>
       </div>
-      <div className="relative w-6/10">
+      <div className="hidden md:block md:relative  w-6/10">
         <div
           style={{
             clipPath: `
