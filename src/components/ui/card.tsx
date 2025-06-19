@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PollIcon from "./poll-icon";
+import gsap from "gsap";
 
 const colorMap: Record<string, string> = {
   blue: "text-blue-500",
@@ -10,18 +11,68 @@ const colorMap: Record<string, string> = {
 
 function Card({ cardColor = "blue", type = "" }) {
   const colorClass = colorMap[cardColor] || "text-blue-500";
-  const [questionVisibility, setQuestionVisibility] = useState(false)
+  const [questionVisibility, setQuestionVisibility] = useState(false);
+  const [shouldRender, setShouldRender] = useState(false);
+
+  const sectionRef = useRef(null);
+
+  // Mount when visible
+  useEffect(() => {
+    if (questionVisibility) {
+      setShouldRender(true);
+    }
+  }, [questionVisibility]);
+
+  // Animate on show/hide
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    const el = sectionRef.current;
+
+    if (questionVisibility) {
+      gsap.fromTo(
+        el,
+        {
+          opacity: 0,
+          y: -30,
+          scale: 0.95,
+          filter: 'blur(2px)',
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          filter: 'blur(0px)',
+          duration: 0.6,
+          ease: 'power1.inOut',
+        }
+      );
+    } else if (shouldRender) {
+      gsap.to(el, {
+        opacity: 0,
+        y: -20,
+        scale: 0.97,
+        filter: 'blur(2px)',
+        duration: 0.4,
+        ease: 'power1.inOut',
+        onComplete: () => setShouldRender(false),
+      });
+    }
+  }, [questionVisibility, shouldRender]);
 
   return (
     <div className="mx-auto max-w-2xl transition-all duration-200 ease-in-out bg-white rounded-2xl overflow-hidden shadow-sm ring-1 ring-black/10 dark:bg-slate-800 dark:text-white dark:ring-white/10 dark:hover:bg-slate-700 dark:hover:shadow-md hover:shadow-md hover:bg-zinc-100 ">
-      <div onClick={() => setQuestionVisibility(!questionVisibility)} className="flex flex-row flex-wrap items-start font-['Urbanist'] gap-5 bg-violet-900 p-6">
+      <div
+        onClick={() => setQuestionVisibility(!questionVisibility)}
+        className="flex flex-row flex-wrap items-start font-['Urbanist'] gap-5 p-6"
+      >
         {/* Icon */}
-        <div className="shrink-0 bg-sky-200">
+        <div className="shrink-0">
           <PollIcon colorClass={`${colorClass}`} type={`${type}`} />
         </div>
 
         {/* Content */}
-        <div className="flex shrink-2 bg-amber-200 space-y-2 md:max-w-[60%] max-w-[70%]">
+        <div className="flex shrink-2 space-y-2 md:max-w-[60%] max-w-[70%]">
           <div className="min-w-0 w-full">
             <h2 className="font-['Lexend'] text-md font-semibold text-gray-900 dark:text-white">
               This is my poll
@@ -30,13 +81,14 @@ function Card({ cardColor = "blue", type = "" }) {
               <strong>ID:</strong> 362161236123
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-600 truncate whitespace-nowrap overflow-hidden">
-              <strong>Owner Username:</strong> ivan.parvanovski347@gmail.commmmmmmmmmmm
+              <strong>Owner Username:</strong>{" "}
+              ivan.parvanovski347@gmail.commmmmmmmmmmm
             </p>
           </div>
         </div>
 
         {/* Controls */}
-        <div className="flex ml-auto items-end gap-2 bg-lime-200">
+        <div className="flex ml-auto items-end gap-2">
           <div className="flex text-amber-500 items-center justify-center gap-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -74,70 +126,75 @@ function Card({ cardColor = "blue", type = "" }) {
         </div>
       </div>
       {/* Question & Form */}
-      <div className={`space-y-4 p-6 pt-2 font-['Lexend'] transition-opacity duration-300 ${questionVisibility ? "opacity-100" : "opacity-0"} bg-red-200`}>
-        <p className="text-base font-medium font-['Lexend']">
-          Which of these cars do you like the most?
-        </p>
-        <form action="#" method="post" className="space-y-3">
-          <fieldset className="space-y-2">
-            <div className="flex items-center gap-3">
-              <input
-                type="radio"
-                id="one"
-                name="first_item"
-                value="1"
-                className="h-4 w-4 text-rose-500"
-              />
-              <label htmlFor="one" className="text-sm">
-                Tesla
-              </label>
-            </div>
-            <div className="flex items-center gap-3">
-              <input
-                type="radio"
-                id="two"
-                name="first_item"
-                value="2"
-                className="h-4 w-4 text-rose-500"
-              />
-              <label htmlFor="two" className="text-sm">
-                Ford
-              </label>
-            </div>
-            <div className="flex items-center gap-3">
-              <input
-                type="radio"
-                id="three"
-                name="first_item"
-                value="3"
-                className="h-4 w-4 text-rose-500"
-              />
-              <label htmlFor="three" className="text-sm">
-                Toyota
-              </label>
-            </div>
-            <div className="flex items-center gap-3">
-              <input
-                type="radio"
-                id="four"
-                name="first_item"
-                value="4"
-                className="h-4 w-4 text-rose-500"
-              />
-              <label htmlFor="four" className="text-sm">
-                BMW
-              </label>
-            </div>
-          </fieldset>
+      {shouldRender && (
+        <div
+          ref={sectionRef}
+          className={`space-y-4 p-8 pt-0 font-['Lexend'] transition-opacity duration-300`}
+        >
+          <p className="text-base font-medium font-['Lexend']">
+            Which of these cars do you like the most?  Which of these cars do you like the most?  Which of these cars do you like the most?
+          </p>
+          <form action="#" method="post" className="space-y-3">
+            <fieldset className="space-y-2">
+              <div className="flex items-center gap-3">
+                <input
+                  type="radio"
+                  id="one"
+                  name="first_item"
+                  value="1"
+                  className="h-4 w-4 text-rose-500"
+                />
+                <label htmlFor="one" className="text-sm">
+                  Tesla
+                </label>
+              </div>
+              <div className="flex items-center gap-3">
+                <input
+                  type="radio"
+                  id="two"
+                  name="first_item"
+                  value="2"
+                  className="h-4 w-4 text-rose-500"
+                />
+                <label htmlFor="two" className="text-sm">
+                  Ford
+                </label>
+              </div>
+              <div className="flex items-center gap-3">
+                <input
+                  type="radio"
+                  id="three"
+                  name="first_item"
+                  value="3"
+                  className="h-4 w-4 text-rose-500"
+                />
+                <label htmlFor="three" className="text-sm">
+                  Toyota
+                </label>
+              </div>
+              <div className="flex items-center gap-3">
+                <input
+                  type="radio"
+                  id="four"
+                  name="first_item"
+                  value="4"
+                  className="h-4 w-4 text-rose-500"
+                />
+                <label htmlFor="four" className="text-sm">
+                  BMW
+                </label>
+              </div>
+            </fieldset>
 
-          <button
-            type="submit"
-            className="rounded-lg bg-rose-500 px-5 py-2 text-sm font-medium text-white hover:bg-rose-800 transition"
-          >
-            VOTE
-          </button>
-        </form>
-      </div>
+            <button
+              type="submit"
+              className="rounded-lg bg-rose-500 px-5 py-2 text-sm font-medium text-white hover:bg-rose-800 transition"
+            >
+              VOTE
+            </button>
+          </form>
+        </div>
+      )}
     </div>
   );
 }
