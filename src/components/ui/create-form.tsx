@@ -50,15 +50,15 @@ function CreateForm() {
       gsap.fromTo(
         formRef.current, 
         { opacity: 0, y: -20 },
-        { opacity: 1, y: 0, duration: 1, ease: "power1.inOut"}
+        { opacity: 1, y: 0, duration: 1, ease: "power2.inOut"}
       )
     }
   }, [formVisibility])
 
   const formTitle = 'Create a Poll'
   const descriptionText = 'Fill out the form below to publish your new poll.'
-  const typedTitle = useTypewriter(formTitle, 150, 50);
-  const typedDescription = useTypewriter(descriptionText, 50, 2500, () => setFormVisibility(true))
+  const typedTitle = useTypewriter(formTitle, 80, 50);
+  const typedDescription = useTypewriter(descriptionText, 30, 1500, () => setFormVisibility(true))
 
   function handleToggleAdd() {
     

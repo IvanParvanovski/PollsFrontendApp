@@ -1,12 +1,13 @@
 import { Card } from "./card";
 import { useState } from "react";
 
+
 export function ExistingPolls() {
     const [activeTab, setActiveTab] = useState("All");
 
     return (
         <>
-         <div>
+          <div>
             <h2 className="text-2xl font-bold text-gray-800 tracking-tight mb-4 font-['Lexend'] flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
