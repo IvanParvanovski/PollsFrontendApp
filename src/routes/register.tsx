@@ -1,11 +1,34 @@
 import { Logo } from "@/components/ui/logo";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
+import { registerNewUser } from "@/queries/auth/register";
 
 export const Route = createFileRoute("/register")({
-  component: RouteComponent,
+  component: RegisterComponent,
 });
 
-function RouteComponent() {
+function RegisterComponent() {
+  const [usernameInput, setUsernameValue] = useState('')
+  const [passwordInput, setPasswordValue] = useState('');
+  const [rePasswordInput, setRePasswordInput] = useState('');
+  
+  const navigate = useNavigate();
+
+  async function handleSubmit(event: any) {
+    event.preventDefault();
+
+    if (rePasswordInput != passwordInput) {
+      console.error("rePass and password are different!")
+      return
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
+    registerNewUser(usernameInput, passwordInput);
+    
+    navigate({to: "/polls"})
+  }
+
   return (
     <div className="relative flex h-full bg-gray-50">
       <div className="absolute top-12 left-12">
@@ -21,7 +44,7 @@ function RouteComponent() {
             <a href="/login">Log In</a></span>.
         </p>
 
-        <form className="relative space-y-4">
+        <form onSubmit={handleSubmit} className="relative space-y-4">
           <div className="sm:col-span-4">
             <label
               htmlFor="username"
@@ -34,6 +57,8 @@ function RouteComponent() {
                 id="username"
                 name="username"
                 type="username"
+                value={usernameInput}
+                onChange={(e) => setUsernameValue(e.target.value)}
                 className="block w-full pl-10 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
               />
               <svg
@@ -65,6 +90,8 @@ function RouteComponent() {
                 id="password"
                 name="password"
                 type="password"
+                value={passwordInput}
+                onChange={(event) => setPasswordValue(event.target.value)}
                 className="block w-full pl-10 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
               />
               <svg
@@ -111,6 +138,8 @@ function RouteComponent() {
                 id="rePassword"
                 name="rePassword"
                 type="password"
+                value={rePasswordInput}
+                onChange={(event) => setRePasswordInput(event.target.value)}
                 className="block pl-10 w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
               />
             </div>

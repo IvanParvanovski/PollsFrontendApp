@@ -1,26 +1,45 @@
-import { Logo } from '@/components/ui/logo';
-import { createFileRoute } from '@tanstack/react-router'
+import { Logo } from "@/components/ui/logo";
+import { login } from "@/queries/auth/login";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
 
-export const Route = createFileRoute('/login')({
+export const Route = createFileRoute("/login")({
   component: RouteComponent,
-})
+});
 
 function RouteComponent() {
-return (
+  const navigate = useNavigate();
+
+  const [usernameInput, setUsernameInput] = useState('')
+  const [passwordInput, setPasswordInput] = useState('')
+
+  async function handleSubmit(event: any) {
+    event.preventDefault();
+
+    login(usernameInput, passwordInput);
+
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
+    navigate({ to: '/polls' });
+  }
+
+  return (
     <div className="relative flex h-full bg-gray-50">
       <div className="absolute top-12 left-12">
-        <Logo/>
+        <Logo />
       </div>
 
       <div className="p-10 w-9/10 md:w-5/10  mx-auto content-center pb-12">
         <h2 className="text-base/7 font-semibold text-gray-900">Log In</h2>
         <p className="mt-1 mb-8 text-sm/6 text-gray-600">
-            Don't have an account? <span className="text-blue-500 underline font-bold">
-              <a href="/register">Register now</a></span>.
+          Don't have an account?{" "}
+          <span className="text-blue-500 underline font-bold">
+            <a href="/register">Register now</a>
+          </span>
+          .
         </p>
 
-
-        <form className="relative space-y-4">
+        <form onSubmit={handleSubmit} className="relative space-y-4">
           <div className="sm:col-span-4">
             <label
               htmlFor="username"
@@ -33,6 +52,8 @@ return (
                 id="username"
                 name="username"
                 type="text"
+                value={usernameInput}
+                onChange={(e) => setUsernameInput(e.target.value)}
                 className="block w-full pl-10 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
               />
               <svg
@@ -64,6 +85,8 @@ return (
                 id="password"
                 name="password"
                 type="password"
+                value={passwordInput}
+                onChange={(e) => setPasswordInput(e.target.value)}
                 className="block w-full pl-10 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
               />
               <svg
@@ -83,7 +106,7 @@ return (
             </div>
           </div>
 
-          <button className="absolute right-0 rounded-lg bg-violet-500 px-6 py-2 text-white font-semibold shadow hover:bg-violet-600 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-1 transition">
+          <button type="submit" className="absolute right-0 rounded-lg bg-violet-500 px-6 py-2 text-white font-semibold shadow hover:bg-violet-600 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-1 transition">
             SUBMIT
           </button>
         </form>
