@@ -22,9 +22,9 @@ function RegisterComponent() {
       return
     }
 
-    await new Promise((resolve) => setTimeout(resolve, 100));
-
     registerNewUser(usernameInput, passwordInput);
+
+    await new Promise((resolve) => setTimeout(resolve, 100));
     
     navigate({to: "/polls"})
   }
