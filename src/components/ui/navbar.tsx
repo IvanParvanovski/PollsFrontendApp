@@ -39,9 +39,9 @@ export function Navbar() {
       <div 
         // ref={sectionRef} 
         className="max-w-7xl mx-auto flex items-center justify-between">
-        <div className="flex items-center gap-8">
+        {/* <div className="flex items-center gap-8">
           <a href="/polls" className="text-base font-medium text-white hover:underline cursor-pointer underline-offset-4">Home</a>
-        </div>
+        </div> */}
 
         <Logo/>
 

@@ -35,7 +35,7 @@ function PollsComponent() {
         </div>
         <div 
           // ref={sectionRef}
-          className="w-full md:w-1/2 rounded-tl-2xl rounded-tr-2xl  md:rounded-tl-2xl bg-rose-50 flex flex-col px-6 md:px-8 pt-8">
+          className="w-full pb-4 md:w-1/2 rounded-tl-2xl rounded-tr-2xl  md:rounded-tl-2xl bg-rose-50 flex flex-col px-6 md:px-8 pt-8">
           <ExistingPolls/>
         </div>
       </div>
